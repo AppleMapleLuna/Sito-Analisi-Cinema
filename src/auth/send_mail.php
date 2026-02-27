@@ -1,0 +1,51 @@
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once '../lib/PHPMailer/src/Exception.php';
+require_once '../lib/PHPMailer/src/PHPMailer.php';
+require_once '../lib/PHPMailer/src/SMTP.php';
+
+function sendVerificationEmail($email, $token) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // Configurazione SMTP Gmail
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+
+        // QUI metti la tua email Gmail
+        $mail->Username = 'gingengtea@gmail.com';
+
+        // QUI metti la tua App Password
+        $mail->Password = 'oddd dfzo vpnl xvto';
+
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Mittente
+        $mail->setFrom('gingengtea@gmail.com', 'Cinema App');
+
+        // Destinatario
+        $mail->addAddress($email);
+
+        // Contenuto
+        $mail->isHTML(true);
+        $mail->Subject = 'Conferma la tua registrazione';
+
+        $link = "http://localhost/SITO-ANALISI-CINEMA/public/verify.php?token=$token";
+
+        $mail->Body = "
+            <h2>Conferma la tua email</h2>
+            <p>Clicca sul link per attivare il tuo account:</p>
+            <a href='$link'>$link</a>
+        ";
+
+        $mail->send();
+        return true;
+
+    } catch (Exception $e) {
+        return false;
+    }
+}

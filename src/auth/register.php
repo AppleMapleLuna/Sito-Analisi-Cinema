@@ -1,6 +1,5 @@
-// src/auth/register.php
 <?php
-require_once '../database/php.conndata.php';
+require_once '../database/php.conndatabase.php';
 
 function registerUser($email, $username, $password) {
     global $conn;
@@ -17,9 +16,18 @@ function registerUser($email, $username, $password) {
     $stmt->bind_param("ssss", $email, $username, $hashed, $token);
 
     if ($stmt->execute()) {
-        // Invia email di conferma
-        $link = "https://tuosito.it/public/verify.php?token=$token";
-        mail($email, "Conferma la tua registrazione", "Clicca qui per confermare: $link");
+
+        // Link di verifica
+        $link = "https://TUO-SITO/render/public/verify.php?token=$token";
+
+        // Invio email (versione semplice)
+        $subject = "Conferma la tua registrazione";
+        $message = "Clicca sul link per confermare il tuo account:\n$link";
+        $headers = "From: no-reply@tuosito.it";
+
+        require_once 'send_mail.php';
+        sendVerificationEmail($email, $token);
+
 
         return true;
     }
