@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(empty($_SESSION['user'])){
+if (empty($_SESSION['user'])) {
   header("Location: login.php");
   exit;
 }
@@ -8,7 +8,7 @@ if(empty($_SESSION['user'])){
 <!doctype html>
 <html>
   <body style="background:#070612;color:#eaf7ff;font-family:system-ui">
-  <h1>Benvenuto <?=htmlspecialchars($_SESSION['user']['name'])?></h1>
-  <a href="logout.php">Logout</a>
+    <h1>Benvenuto <?= htmlspecialchars($_SESSION['user']['username']) ?></h1>
+    <a href="logout.php" style="color:#eaf7ff;">Logout</a>
   </body>
 </html>

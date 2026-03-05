@@ -1,7 +1,7 @@
 <?php
 // config.php
 
-$dotenv = parse_ini_file(__DIR__ . '/.env');
+$dotenv = parse_ini_file(__DIR__ . '/credenzialidatabase.env');
 
 $host = $dotenv['DB_HOST'];
 $user = $dotenv['DB_USER'];

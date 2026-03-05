@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../database/php.conndata.php';
+require_once '../database/php.conndatabase.php';
 
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';

@@ -23,6 +23,7 @@ $error = $_GET['e'] ?? '';
         <input name="password" type="password" placeholder="password" required>
         <button>LOGIN</button>
       </form>
+      <a href="register.php"><button>Registrati</button></a>
     </div>
   </body>
 </html>

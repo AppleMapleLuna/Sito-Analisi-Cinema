@@ -1,36 +1,29 @@
 <?php
 require_once '../database/php.conndatabase.php';
+require_once 'send_mail.php';
 
-function registerUser($email, $username, $password) {
-    global $conn;
+$email = $_POST['email'] ?? '';
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
 
-    // Hash della password
-    $hashed = password_hash($password, PASSWORD_DEFAULT);
-
-    // Token di verifica email
-    $token = bin2hex(random_bytes(16));
-
-    $sql = "INSERT INTO utenti (Email, Username, Password, TokenVerifica, Verificato)
-            VALUES (?, ?, ?, ?, 0)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $email, $username, $hashed, $token);
-
-    if ($stmt->execute()) {
-
-        // Link di verifica
-        $link = "https://TUO-SITO/render/public/verify.php?token=$token";
-
-        // Invio email (versione semplice)
-        $subject = "Conferma la tua registrazione";
-        $message = "Clicca sul link per confermare il tuo account:\n$link";
-        $headers = "From: no-reply@tuosito.it";
-
-        require_once 'send_mail.php';
-        sendVerificationEmail($email, $token);
-
-
-        return true;
-    }
-
-    return false;
+if (empty($email) || empty($username) || empty($password)) {
+    header("Location: ../../public/register.php?e=1");
+    exit;
 }
+
+$hashed = password_hash($password, PASSWORD_DEFAULT);
+$token = bin2hex(random_bytes(16));
+
+$sql = "INSERT INTO utenti (Email, Username, Password, TokenVerifica, Verificato)
+        VALUES (?, ?, ?, ?, 0)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ssss", $email, $username, $hashed, $token);
+
+if ($stmt->execute()) {
+    sendVerificationEmail($email, $token);
+    header("Location: ../../public/register.php?ok=1");
+    exit;
+}
+
+header("Location: ../../public/register.php?e=1");
+exit;
