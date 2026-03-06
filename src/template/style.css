@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body{
   margin:0;
   font-family:system-ui;
@@ -16,13 +20,13 @@ body{
 }
 input,button{
   width:100%;
-  padding:20px;
+  padding:12px;
   margin-top:10px;
   border-radius:12px;
   border:none;
 }
 button{
-  background:linear-gradient(90deg,#0dff00,#ff2bd6);
+  background:linear-gradient(90deg,#00f5ff,#ff2bd6);
   color:black;
   font-weight:bold;
   cursor:pointer;
