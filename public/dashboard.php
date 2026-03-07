@@ -10,5 +10,6 @@ if (empty($_SESSION['user'])) {
   <body style="background:#070612;color:#eaf7ff;font-family:system-ui">
     <h1>Benvenuto <?= htmlspecialchars($_SESSION['user']['username']) ?></h1>
     <a href="logout.php" style="color:#eaf7ff;">Logout</a>
+    <a href="profilo.php" style="color:#eaf7ff;">Logout</a>
   </body>
 </html>
