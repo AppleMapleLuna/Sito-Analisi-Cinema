@@ -8,7 +8,7 @@ body{
   min-height:100vh;
   display:grid;
   place-items:center;
-  background:#05040a;
+  background:#0f172a;
   color:#eaf7ff;
 }
 .card{
@@ -16,7 +16,7 @@ body{
   padding:24px;
   border-radius:18px;
   background:rgba(255,255,255,.05);
-  box-shadow:0 0 40px #00f5ff55;
+  box-shadow:0 0 40px #ff000055;
 }
 input,button{
   width:100%;
@@ -26,9 +26,9 @@ input,button{
   border:none;
 }
 button{
-  background:linear-gradient(90deg,#00f5ff,#ff2bd6);
-  color:black;
+  background:linear-gradient(90deg,#fb0c24,#cc0f0f);
+  color:white;
   font-weight:bold;
   cursor:pointer;
 }
-.error{color:#ff2bd6;margin-top:10px;}
+.error{color:#ff2b2b;margin-top:10px;}

@@ -11,7 +11,7 @@ if (empty($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifica profilo - CinemaAnalisi</title>
-    <link rel="stylesheet" href="../src/scripts/style_profilo.css">
+    <link rel="stylesheet" href="../src/template/style_profilo.css">
 </head>
 <body>
     <div class="container">
@@ -48,7 +48,7 @@ if (empty($_SESSION['user'])) {
 
                 <div class="form-actions">
                     <button type="submit" class="btn-save">Salva modifiche</button>
-                    <button type="button" class="btn-cancel" onclick="window.location.href='dashboard.html'">Annulla</button>
+                    <button type="button" class="btn-cancel" onclick="window.location.href='dashboard.php'">Annulla</button>
                 </div>
             </form>
 
