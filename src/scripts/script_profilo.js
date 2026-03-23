@@ -1,89 +1,109 @@
 document.addEventListener('DOMContentLoaded', function() {
-    loadProfileData();
-
-    // Anteprima avatar quando si seleziona un file
-    document.getElementById('avatar-upload').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                document.getElementById('avatar-preview').src = event.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Gestione submit del form
-    document.getElementById('profile-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        saveProfileData();
-    });
+    loadProfile();
+    document.getElementById('avatar-upload').addEventListener('change', handleAvatar);
+    document.getElementById('edit-username').addEventListener('click', showEditUsername);
+    document.getElementById('cancel-username').addEventListener('click', hideEditUsername);
+    document.getElementById('save-username').addEventListener('click', saveUsername);
+    document.getElementById('edit-email').addEventListener('click', showEditEmail);
+    document.getElementById('cancel-email').addEventListener('click', hideEditEmail);
+    document.getElementById('save-email').addEventListener('click', saveEmail);
+    document.getElementById('lingua-select').addEventListener('change', changeLanguage);
 });
 
-function loadProfileData() {
-    fetch('get_profilo.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('username').value = data.user.Username;
-                document.getElementById('email').value = data.user.Email;
-                // Imposta l'avatar (se presente, altrimenti default)
-                if (data.user.Avatar) {
-                    document.getElementById('avatar-preview').src = data.user.Avatar;
-                } else {
-                    document.getElementById('avatar-preview').src = 'default-avatar.png';
-                }
-            } else {
-                showMessage('Errore nel caricamento del profilo', 'error');
-            }
+function loadProfile() {
+    fetch('api.php?action=get_profilo')
+        .then(r => r.json())
+        .then(d => {
+            if (d.success) {
+                document.getElementById('username-display').textContent = d.user.Username;
+                document.getElementById('email-display').textContent = d.user.Email;
+                document.getElementById('avatar-preview').src = d.user.Avatar || 'default-avatar.png';
+            } else showMessage('Errore', 'error');
         })
-        .catch(error => {
-            console.error('Errore:', error);
-            showMessage('Errore di connessione', 'error');
-        });
+        .catch(() => showMessage('Errore', 'error'));
 }
 
-function saveProfileData() {
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
-
-    if (password !== confirmPassword) {
-        showMessage('Le password non coincidono', 'error');
-        return;
-    }
-
-    const formData = new FormData(document.getElementById('profile-form'));
-
-    fetch('update_profilo.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showMessage('Profilo aggiornato con successo!', 'success');
-            // Ricarica i dati per mostrare il nuovo avatar (se cambiato)
-            loadProfileData();
-            // Pulisci i campi password
-            document.getElementById('password').value = '';
-            document.getElementById('confirm-password').value = '';
-        } else {
-            showMessage(data.message || 'Errore durante l\'aggiornamento', 'error');
-        }
-    })
-    .catch(error => {
-        console.error('Errore:', error);
-        showMessage('Errore di connessione', 'error');
-    });
+function handleAvatar(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => document.getElementById('avatar-preview').src = ev.target.result;
+    reader.readAsDataURL(file);
+    const fd = new FormData();
+    fd.append('action', 'update_avatar');
+    fd.append('avatar', file);
+    fetch('api.php', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(d => d.success ? showMessage('OK', 'success') : showMessage('Errore', 'error'))
+        .catch(() => showMessage('Errore', 'error'));
 }
 
-function showMessage(text, type) {
-    const messageDiv = document.getElementById('message');
-    messageDiv.textContent = text;
-    messageDiv.className = 'message ' + type;
+function showEditUsername() {
+    document.getElementById('username-display').style.display = 'none';
+    document.getElementById('edit-username').style.display = 'none';
+    document.getElementById('edit-username-form').style.display = 'flex';
+    document.getElementById('username-input').value = document.getElementById('username-display').textContent;
+}
+function hideEditUsername() {
+    document.getElementById('username-display').style.display = 'inline';
+    document.getElementById('edit-username').style.display = 'inline';
+    document.getElementById('edit-username-form').style.display = 'none';
+}
+function saveUsername() {
+    const val = document.getElementById('username-input').value.trim();
+    if (!val) return;
+    const fd = new FormData();
+    fd.append('action', 'update_username');
+    fd.append('username', val);
+    fetch('api.php', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(d => {
+            if (d.success) {
+                document.getElementById('username-display').textContent = val;
+                hideEditUsername();
+                showMessage('OK', 'success');
+            } else showMessage('Errore', 'error');
+        })
+        .catch(() => showMessage('Errore', 'error'));
+}
 
-    setTimeout(() => {
-        messageDiv.textContent = '';
-        messageDiv.className = 'message';
-    }, 5000);
+function showEditEmail() {
+    document.getElementById('email-display').style.display = 'none';
+    document.getElementById('edit-email').style.display = 'none';
+    document.getElementById('edit-email-form').style.display = 'flex';
+    document.getElementById('email-input').value = document.getElementById('email-display').textContent;
+}
+function hideEditEmail() {
+    document.getElementById('email-display').style.display = 'inline';
+    document.getElementById('edit-email').style.display = 'inline';
+    document.getElementById('edit-email-form').style.display = 'none';
+}
+function saveEmail() {
+    const val = document.getElementById('email-input').value.trim();
+    if (!val) return;
+    const fd = new FormData();
+    fd.append('action', 'update_email');
+    fd.append('email', val);
+    fetch('api.php', { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(d => {
+            if (d.success) {
+                document.getElementById('email-display').textContent = val;
+                hideEditEmail();
+                showMessage('OK', 'success');
+            } else showMessage('Errore', 'error');
+        })
+        .catch(() => showMessage('Errore', 'error'));
+}
+
+function changeLanguage() {
+    const lang = document.getElementById('lingua-select').value;
+    window.location.href = 'profilo.html?lang=' + lang;
+}
+
+function showMessage(txt, type) {
+    const msg = document.getElementById('message');
+    msg.textContent = txt;
+    msg.className = 'message ' + type;
+    setTimeout(() => { msg.textContent = ''; msg.className = 'message'; }, 3000);
 }

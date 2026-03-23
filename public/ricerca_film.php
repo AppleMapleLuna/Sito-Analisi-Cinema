@@ -1,3 +1,8 @@
+<?php
+    require_once '../src/auth/film_repository.php';
+    $films = FilmRepository::getAllFilms();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +11,13 @@
     <title>Ricerca film</title>
 </head>
 <body>
-    <h1>Questa è la ricerca film</h1>
-    <p>Inserisci i film qua</p>
+    <h1>Ricerca film</h1>
+
+    <div class="film-list">
+        <?php foreach ($films as $film): ?>
+            <?php include '../src/template/components/film-card.php'; ?>
+        <?php endforeach; ?>
+    </div>
+
 </body>
 </html>

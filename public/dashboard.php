@@ -11,7 +11,7 @@ if (empty($_SESSION['user'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profilo</title>
-  <link rel="stylesheet" href="../src/template/homepagestyle.css">
+  <link rel="stylesheet" href="../src/template/pages/homepagestyle.css">
 </head>
 <body>
     <h1>Benvenuto <?= htmlspecialchars($_SESSION['user']['username']) ?></h1>

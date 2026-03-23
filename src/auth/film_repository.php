@@ -1,14 +1,18 @@
 <?php
-// src/auth/FilmRepository.php
-
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/../database/php.conndatabase.php';
 
 class FilmRepository {
 
     public static function getAllFilms() {
         global $conn;
 
-        $sql = "SELECT titolo, immagine FROM film";
+        $sql = "
+            SELECT f.ID_Film, f.Titolo, f.Anno, f.Durata, f.Trama,
+                   i.URL AS poster
+            FROM film f
+            LEFT JOIN immagini i ON f.ID_Film = i.ID_Film
+        ";
+
         $result = $conn->query($sql);
 
         $films = [];

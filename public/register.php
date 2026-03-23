@@ -8,7 +8,7 @@ $ok = $_GET['ok'] ?? '';
 <head>
     <meta charset="utf-8">
     <title>Registrazione</title>
-    <link rel="stylesheet" href="../src/template/style_login.css">
+    <link rel="stylesheet" href="../src/template/pages/style_login.css">
 </head>
 <body>
     <div class="card">
