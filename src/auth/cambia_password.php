@@ -1,7 +1,7 @@
 <?php
-require_once 'config.php';
+require_once '../database/php.conndatabase.php';
 if (!isset($_SESSION['ID_Utente'])) {
-    header('Location: login.html');
+    header('Location: ../../public/login.php');
     exit;
 }
 ?>

@@ -17,5 +17,5 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // 4. Redirect
-header("Location: index.html");
+header("Location: index.php");
 exit;

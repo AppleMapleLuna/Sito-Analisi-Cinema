@@ -1,7 +1,7 @@
 <?php
-require_once 'config.php';
+require_once '../src/database/php.conndatabase.php';
 if (!isset($_SESSION['ID_Utente'])) {
-    header('Location: login.html');
+    header('Location: login.php');
     exit;
 }
 ?>
@@ -48,7 +48,7 @@ if (!isset($_SESSION['ID_Utente'])) {
             <div class="info-row">
                 <span class="info-label">Password:</span>
                 <span class="info-value">••••••••</span>
-                <a href="cambia_password.php" class="btn-edit">Cambia password</a>
+                <a href="../src/auth/cambia_password.php" class="btn-edit">Cambia password</a>
             </div>
 
             <div class="info-row">
@@ -66,6 +66,6 @@ if (!isset($_SESSION['ID_Utente'])) {
             <div id="message" class="message"></div>
         </div>
     </div>
-    <script src="script_gestione_profilo.js"></script>
+    <script src="../src/scripts/script_profilo.js"></script>
 </body>
 </html>

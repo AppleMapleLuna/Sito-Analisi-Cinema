@@ -17,6 +17,6 @@ if (empty($_SESSION['user'])) {
     <h1>Benvenuto <?= htmlspecialchars($_SESSION['user']['username']) ?></h1>
     <a href="logout.php" style="color:#eaf7ff;">Logout</a>
     <a href="profilo.php" style="color:#eaf7ff;">Profilo</a>
-    <a href="index.html">Homepage</a>
+    <a href="index.php">Homepage</a>
 </body>
 </html>
