@@ -25,10 +25,12 @@ if ($row = $result->fetch_assoc()) {
 
     if (password_verify($password, $row['Password'])) {
         $_SESSION['user'] = [
-            'id' => $row['ID_Utente'],
-            'username' => $row['Username'],
-            'email' => $email
+            'ID' => $row['ID_utente'],
+            'Email' => $row['Email'],
+            'Username' => $row['Username'],
+            'admin' => (int)$row['admin']
         ];
+
 
         header('Location: ../../public/dashboard.php');
         exit;

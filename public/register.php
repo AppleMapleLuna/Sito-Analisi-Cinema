@@ -13,6 +13,11 @@ $ok = $_GET['ok'] ?? '';
 <body>
     <div class="card">
         <h2>REGISTRAZIONE</h2>
+        <?php if (isset($_GET['ok'])): ?>
+            <div class="success">
+                Registrazione completata! Controlla la tua email per verificare l’account.
+            </div>
+        <?php endif; ?>
 
         <?php if ($error): ?>
             <div class="error">

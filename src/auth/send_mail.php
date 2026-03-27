@@ -37,9 +37,11 @@ function sendVerificationEmail($email, $token) {
         $link = "http://localhost/SITO-ANALISI-CINEMA/public/verify.php?token=$token";
 
         $mail->Body = "
-            <h2>Conferma la tua email</h2>
-            <p>Clicca sul link per attivare il tuo account:</p>
-            <a href='$link'>$link</a>
+            Ciao!<br><br>
+            Grazie per esserti registrato.<br>
+            Per attivare il tuo account, clicca sul link qui sotto:<br><br>
+            <a href='$link'>Verifica il tuo account</a><br><br>
+            Se non hai richiesto tu la registrazione, ignora questa email.
         ";
 
         $mail->send();

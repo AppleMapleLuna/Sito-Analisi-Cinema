@@ -15,6 +15,11 @@ $error = $_GET['e'] ?? '';
     <link rel="stylesheet" href="../src/template/pages/style_login.css">
   </head>
   <body>
+    <?php if (isset($_GET['verified'])): ?>
+        <div class="success">Email verificata! Ora puoi accedere.</div>
+    <?php endif; ?>
+
+
     <div class="card">
       <h2>ACCESSO</h2>
       <?php if($error): ?><div class="error">Login errato</div><?php endif; ?>
@@ -25,5 +30,7 @@ $error = $_GET['e'] ?? '';
       </form>
       <a href="register.php"><button>Registrati</button></a>
     </div>
+
+    <a href="index.php"><button>Ritorna indietro</button></a>
   </body>
 </html>

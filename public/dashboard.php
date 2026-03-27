@@ -6,8 +6,8 @@ if (empty($_SESSION['user'])) {
     exit;
 }
 
-if ($_SESSION['user']['admin'] === 1) {
-    include __DIR__ . '/admin/dashboard_admin.php';
+if ($isAdmin = !empty($_SESSION['user']['admin'])) {
+    include __DIR__ . '/../src/admin/dashboard_admin.php';
 } else {
-    include __DIR__ . '/user/dashboard_user.php';
+    include __DIR__ . '/../src/user/dashboard_user.php';
 }
