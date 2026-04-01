@@ -7,7 +7,7 @@ if (empty($_SESSION['user'])) {
 }
 
 if ($_SESSION['user']['admin'] === 1) {
-    include __DIR__ . '/../src/admin/admin_dashboard.php';
+    include __DIR__ . '/../src/admin/dashboard_admin.php';
 } else {
     include __DIR__ . '/../src/user/dashboard_utente.php';
 }

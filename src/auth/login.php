@@ -10,7 +10,7 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-$sql = "SELECT ID_Utente, Username, Password, Verificato FROM utenti WHERE Email = ?";
+$sql = "SELECT ID_Utente, Username, Password, Verificato, admin FROM utenti WHERE Email = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
@@ -25,7 +25,7 @@ if ($row = $result->fetch_assoc()) {
 
     if (password_verify($password, $row['Password'])) {
         $_SESSION['user'] = [
-            'ID' => $row['ID_utente'],
+            'ID_Utente' => $row['ID_Utente'],
             'Email' => $row['Email'],
             'Username' => $row['Username'],
             'admin' => (int)$row['admin']

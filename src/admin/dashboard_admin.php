@@ -1,7 +1,7 @@
 <?php
 require_once '../database/php.conndatabase.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['admin'] !== 1) {
+if (!isset($_SESSION['ID_Utente']) || $_SESSION['admin'] !== 1) {
     header('Location: ../../public/login.php');
     exit;
 }
