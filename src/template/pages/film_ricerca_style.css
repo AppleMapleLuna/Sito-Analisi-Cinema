@@ -1,0 +1,72 @@
+/* GRID CONTAINER */
+.film-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 35px;
+    padding: 40px 60px;
+}
+
+/* FILM CARD */
+.film-card {
+    background: #1e293b; /* same tone as your .movie class */
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    border: 1px solid rgba(255, 0, 0, 0.25);
+}
+
+/* HOVER ANIMATION */
+.film-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.35);
+    border-color: rgba(255, 0, 0, 0.6);
+}
+
+/* POSTER IMAGE */
+.film-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* POSTER ZOOM ON HOVER */
+.film-card:hover img {
+    transform: scale(1.08);
+}
+
+/* PLACEHOLDER FOR MISSING POSTERS */
+.poster-placeholder {
+    width: 100%;
+    height: 320px;
+    background: linear-gradient(135deg, #2d3748, #1a202c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff4d4d;
+    font-size: 15px;
+    font-style: italic;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+/* TEXT AREA */
+.film-card h3 {
+    font-size: 20px;
+    margin: 15px 0 5px;
+    text-align: center;
+    color: white;
+}
+
+.film-card p {
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 15px;
+}
+
+/* OPTIONAL: MAKE THE ENTIRE CARD CLICKABLE */
+.film-card a {
+    color: inherit;
+    text-decoration: none;
+}

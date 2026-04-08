@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ricerca film</title>
+    <link rel="stylesheet" href="./src/template/pages/film_ricerca_style.css">
 </head>
 <body>
     <h1>Ricerca film</h1>
