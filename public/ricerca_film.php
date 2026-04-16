@@ -8,7 +8,7 @@
 
     $films = FilmRepository::getAllFilms();
 
-    // FILTERING IN PHP (simple and effective)
+    // FILTERING IN PHP
     $films = array_filter($films, function($film) use ($search, $year) {
         $matchSearch = empty($search) || stripos($film['Titolo'], $search) !== false;
         $matchYear = empty($year) || $film['Anno'] == $year;
@@ -42,6 +42,24 @@
     <link rel="stylesheet" href="../src/template/pages/film_ricerca_style.css">
 </head>
 <body>
+    <!-- NAVBAR -->
+
+    <nav>
+
+    <div class="logo">🎬 <a href="index.php">Analisi Cinema</a></div>
+
+    <ul>
+    <li><a href="dashboard.php">Home</a></li>
+    <li><a href="ricerca_film.php">Film</a></li>
+    <li><a href="#">Recensioni</a></li>
+    <li><a href="#">Preferiti</a></li>
+    <li><a href="login.php">Login</a></li>
+    </ul>
+
+    <input class="search" placeholder="Cerca film...">
+
+    </nav>
+
     <h1>Ricerca film</h1>
 
     <form class="film-filters" method="GET">

@@ -19,7 +19,7 @@
 
 <nav>
 
-<div class="logo">🎬 Analisi Cinema</div>
+<div class="logo">🎬 <a href="index.php">Analisi Cinema</a></div>
 
 <ul>
 <li><a href="dashboard.php">Home</a></li>
