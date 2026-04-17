@@ -12,7 +12,7 @@ $error = $_GET['e'] ?? '';
     <meta charset="utf-8">
     <title>Neon Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../src/template/pages/style_login.css">
+    <link rel="stylesheet" href="/src/template/pages/style_login.css">
   </head>
   <body>
     <?php if (isset($_GET['verified'])): ?>
@@ -23,7 +23,7 @@ $error = $_GET['e'] ?? '';
     <div class="card">
       <h2>ACCESSO</h2>
       <?php if($error): ?><div class="error">Login errato</div><?php endif; ?>
-      <form method="post" action="../src/auth/login.php">
+      <form method="post" action="/src/auth/login.php">
         <input name="email" placeholder="email" required>
         <input name="password" type="password" placeholder="password" required>
         <button>LOGIN</button>

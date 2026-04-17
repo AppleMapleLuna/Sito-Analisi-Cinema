@@ -24,7 +24,7 @@
 <ul>
 <li><a href="dashboard.php">Home</a></li>
 <li><a href="ricerca_film.php">Film</a></li>
-<li><a href="#">Recensioni</a></li>
+<li><a href="recensioni.php">Recensioni</a></li>
 <li><a href="#">Preferiti</a></li>
 <li><a href="login.php">Login</a></li>
 </ul>

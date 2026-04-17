@@ -6,7 +6,7 @@ $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
 if (empty($email) || empty($password)) {
-    header('Location: ../../public/login.php?e=1');
+    header('Location: /login.php?e=1');
     exit;
 }
 
@@ -19,7 +19,7 @@ $result = $stmt->get_result();
 if ($row = $result->fetch_assoc()) {
 
     if ($row['Verificato'] == 0) {
-        header('Location: ../../public/login.php?e=2'); // email non verificata
+        header('Location: /login.php?e=2'); // email non verificata
         exit;
     }
 
@@ -32,10 +32,10 @@ if ($row = $result->fetch_assoc()) {
         ];
 
 
-        header('Location: ../../public/dashboard.php');
+        header('Location: /dashboard.php');
         exit;
     }
 }
 
-header('Location: ../../public/login.php?e=1');
+header('Location: /login.php?e=1');
 exit;

@@ -1,0 +1,6 @@
+body{background:#0f172a;color:white;font-family:Poppins;}
+.movie{cursor:pointer}
+.form-container{max-width:500px;margin:40px auto;background:#1e293b;padding:30px;border-radius:10px;color:white;}
+.stars span{font-size:25px;cursor:pointer;color:gray;}
+.stars span.active{color:#facc15;}
+.delete-btn{background:red;color:white;border:none;padding:6px 10px;margin-top:10px;}
