@@ -20,5 +20,5 @@ $film = FilmRepository::getFilmById($_GET['id']);
     <label>Trama</label><br>
     <textarea name="trama"><?= htmlspecialchars($film['Trama']) ?></textarea><br><br>
 
-    <button type="submit">Aggiorna</button>
+    <button type="submit">Salva le Modifiche</button>
 </form>

@@ -1,92 +1,128 @@
 <?php
+// Avevo problemi di sessione quindi metto questo
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../database/php.conndatabase.php';
 
-if (!isset($_SESSION['ID_Utente']) || $_SESSION['admin'] !== 1) {
-    header('Location: ../../public/login.php');
+// Controllo accesso amministratore
+if (
+    !isset($_SESSION['user']) ||
+    !isset($_SESSION['user']['ID_Utente']) ||
+    $_SESSION['user']['admin'] !== 1
+) {
+    header('Location: /login.php');
     exit;
 }
 
+// Messaggi temporanei
 $message = '';
 if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
     unset($_SESSION['message']);
 }
 
-$stmt = $pdo->query("
-    SELECT f.ID_Film, f.Titolo, f.Anno, f.Durata, f.Trama, r.Nome, r.Cognome
-    FROM Film f
-    LEFT JOIN Registi r ON f.ID_Regista = r.ID_Regista
+// Query film 
+$result = $conn->query("
+    SELECT f.ID_film, f.Titolo, f.Anno, f.Durata, f.Trama, r.Nome, r.Cognome
+    FROM film f
+    LEFT JOIN registi r ON f.ID_Regista = r.ID_Regista
     ORDER BY f.Anno DESC
 ");
 
-$films = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$films = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
-$directorsStmt = $pdo->query("SELECT ID_Regista, Nome, Cognome FROM Registi ORDER BY Cognome");
-$directors = $directorsStmt->fetchAll(PDO::FETCH_ASSOC);
+// Query registi
+$result2 = $conn->query("SELECT ID_regista, Nome, Cognome FROM registi ORDER BY Cognome");
+$directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
 ?>
 
-
+<!--HTML-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Gestione Film</title>
-    <link rel="stylesheet" href="../template/pages/admin_style.css">
-    <script src="../scripts/admin_script.js" defer></script>
+    <title>Admin - Gestione film</title>
+
+    <!-- Percorsi corretti -->
+    <link rel="stylesheet" href="/src/template/pages/admin_style.css">
+    <script src="/src/scripts/admin_script.js" defer></script>
 </head>
 <body>
+
     <div class="admin-container">
+
+        <!-- HEADER -->
         <header class="admin-header">
             <h1>Area Amministratore</h1>
             <div class="user-info">
-                <span>Ciao, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                <a href="../../public/logout.php" class="logout-btn">Logout</a>
+                <span>Ciao, <?= htmlspecialchars($_SESSION['user']['Username']) ?></span>
+                <a href="/logout.php" class="logout-btn">Logout</a>
             </div>
         </header>
 
+        <!-- MESSAGGIO -->
         <?php if ($message): ?>
-            <div class="message"><?php echo htmlspecialchars($message); ?></div>
+            <div class="message"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
 
         <div class="admin-grid">
+
+            <!-- FORM CREAZIONE FILM -->
             <section class="create-film-card">
-                <h2>Crea Nuovo Film</h2>
-                <form action="film_create.php" method="POST" class="film-form">
+                <h2>Crea Nuovo film</h2>
+
+                <form action="/src/admin/film_create.php" method="POST" class="film-form">
+
                     <div class="form-group">
                         <label for="titolo">Titolo</label>
                         <input type="text" id="titolo" name="titolo" required>
                     </div>
+
                     <div class="form-group">
                         <label for="anno">Anno</label>
                         <input type="number" id="anno" name="anno" required min="1900" max="2026">
                     </div>
+
                     <div class="form-group">
                         <label for="durata">Durata (minuti)</label>
                         <input type="number" id="durata" name="durata">
                     </div>
+
                     <div class="form-group">
                         <label for="trama">Trama</label>
                         <textarea id="trama" name="trama" rows="3"></textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="immagine">URL Immagine</label>
+                        <input type="text" id="immagine" name="immagine_url" placeholder="URL immagine">
+                    </div>
+
                     <div class="form-group">
                         <label for="regista">Regista</label>
                         <select id="regista" name="regista_id" required>
                             <option value="">Seleziona regista</option>
                             <?php foreach ($directors as $dir): ?>
-                                <option value="<?php echo $dir['ID_Regista']; ?>">
-                                    <?php echo htmlspecialchars($dir['Nome'] . ' ' . $dir['Cognome']); ?>
+                                <option value="<?= $dir['ID_Regista'] ?>">
+                                    <?= htmlspecialchars($dir['Nome'] . ' ' . $dir['Cognome']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <a href="admin_add_director.php" class="small-link">+ Nuovo regista</a>
+
+                        <a href="/src/admin/admin_add_director.php" class="small-link">+ Nuovo regista</a>
                     </div>
-                    <button type="submit" class="btn-create">Crea Film</button>
+
+                    <button type="submit" class="btn-create">Crea film</button>
                 </form>
             </section>
 
+            <!-- LISTA FILM -->
             <section class="films-list-card">
-                <h2>Elenco Film</h2>
+                <h2>Elenco film</h2>
+
                 <div class="table-responsive">
                     <table class="films-table">
                         <thead>
@@ -99,20 +135,26 @@ $directors = $directorsStmt->fetchAll(PDO::FETCH_ASSOC);
                                 <th>Azioni</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <?php if (count($films) > 0): ?>
+                            <?php if (!empty($films)): ?>
                                 <?php foreach ($films as $film): ?>
                                     <tr>
-                                        <td><?php echo $film['ID_Film']; ?></td>
-                                        <td><?php echo htmlspecialchars($film['Titolo']); ?></td>
-                                        <td><?php echo $film['Anno']; ?></td>
-                                        <td><?php echo $film['Durata'] ? $film['Durata'] . ' min' : '-'; ?></td>
-                                        <td><?php echo htmlspecialchars($film['Nome'] . ' ' . $film['Cognome']); ?></td>
+                                        <td><?= $film['ID_film'] ?></td>
+                                        <td><?= htmlspecialchars($film['Titolo']) ?></td>
+                                        <td><?= $film['Anno'] ?></td>
+                                        <td><?= $film['Durata'] ? $film['Durata'] . ' min' : '-' ?></td>
+                                        <td><?= htmlspecialchars($film['Nome'] . ' ' . $film['Cognome']) ?></td>
+
                                         <td>
-                                            <form action="film_delete.php" method="POST" class="delete-form" data-film="<?php echo htmlspecialchars($film['Titolo']); ?>">
-                                                <input type="hidden" name="film_id" value="<?php echo $film['ID_Film']; ?>">
+                                            <form action="/src/admin/film_delete.php" method="POST" class="delete-form">
+                                                <input type="hidden" name="film_id" value="<?= $film['ID_film'] ?>">
                                                 <button type="submit" class="btn-delete">Elimina</button>
                                             </form>
+                                        </td>
+
+                                        <td>
+                                            <a href="/src/admin/film_edit.php?id=<?= $film['ID_film'] ?>" class="btn-edit">Modifica</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -120,10 +162,13 @@ $directors = $directorsStmt->fetchAll(PDO::FETCH_ASSOC);
                                 <tr><td colspan="6">Nessun film presente.</td></tr>
                             <?php endif; ?>
                         </tbody>
+
                     </table>
                 </div>
             </section>
+
         </div>
     </div>
+
 </body>
 </html>

@@ -1,6 +1,123 @@
-body{background:#0f172a;color:white;font-family:Poppins;}
-.movie{cursor:pointer}
-.form-container{max-width:500px;margin:40px auto;background:#1e293b;padding:30px;border-radius:10px;color:white;}
-.stars span{font-size:25px;cursor:pointer;color:gray;}
-.stars span.active{color:#facc15;}
-.delete-btn{background:red;color:white;border:none;padding:6px 10px;margin-top:10px;}
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+/* BACKGROUND */
+body {
+    background: #0f172a;
+    color: white;
+    padding: 40px 20px;
+}
+
+/* FORM CONTAINER */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto 50px;
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.15);
+    border: 1px solid rgba(250, 204, 21, 0.2);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #facc15;
+}
+
+/* INPUTS */
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: white;
+    transition: 0.2s;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    border-color: #facc15;
+    box-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
+    outline: none;
+}
+
+/* STARS */
+.stars {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.stars span {
+    font-size: 30px;
+    cursor: pointer;
+    color: #475569;
+    transition: 0.2s;
+}
+
+.stars span.active {
+    color: #facc15;
+    transform: scale(1.2);
+}
+
+/* SUBMIT BUTTON */
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    background: #facc15;
+    color: #0f172a;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.form-container button:hover {
+    background: #fbbf24;
+}
+
+/* REVIEW CARD */
+.rec-card {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(250, 204, 21, 0.2);
+    box-shadow: 0 0 15px rgba(250, 204, 21, 0.1);
+}
+
+.rec-card h3 {
+    color: #facc15;
+    margin-bottom: 10px;
+}
+
+.rec-card p {
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+}

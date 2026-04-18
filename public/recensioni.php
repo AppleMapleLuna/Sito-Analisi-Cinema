@@ -6,7 +6,7 @@ require_once __DIR__ . '/../src/database/php.conndatabase.php';
 <head>
 <meta charset="UTF-8">
 <title>Recensioni</title>
-<link rel="stylesheet" href="../src/template/pages/style_recensione.php">
+<link rel="stylesheet" href="../src/template/pages/style_recensione.css">
 </head>
 <body>
 
@@ -43,6 +43,6 @@ while($r = $res->fetch_assoc()){
 </div>
 <?php } ?>
 
-<script src="../src/scrips/script_recensione.js"></script>
+<script src="../src/scripts/script_recensione.js"></script>
 </body>
 </html>

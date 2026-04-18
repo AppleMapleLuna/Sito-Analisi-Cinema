@@ -1,5 +1,9 @@
 <?php
+    require_once '../src/database/php.conndatabase.php';
     require_once '../src/auth/film_repository.php';
+
+    // inizializza la repository
+    FilmRepository::init($conn);
 
     // Read filters from GET
     $search = $_GET['search'] ?? '';
@@ -25,11 +29,9 @@
     if ($sort === 'year_desc') {
         usort($films, fn($a, $b) => $b['Anno'] <=> $a['Anno']);
     }
-
     if ($sort === 'year_asc') {
         usort($films, fn($a, $b) => $a['Anno'] <=> $b['Anno']);
     }
-
 ?>
 
 

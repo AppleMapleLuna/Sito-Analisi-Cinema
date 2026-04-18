@@ -24,12 +24,12 @@ body {
     padding: 20px 30px;
     border-radius: 12px;
     margin-bottom: 30px;
-    border-left: 5px solid #cc0000;
+    border-left: 5px solid #facc15;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .admin-header h1 {
-    color: #cc0000;
+    color: #facc15;
     font-size: 1.8rem;
 }
 
@@ -40,7 +40,7 @@ body {
 }
 
 .logout-btn {
-    background: #cc0000;
+    background: #facc15;
     color: #000;
     padding: 8px 16px;
     border-radius: 6px;
@@ -50,11 +50,11 @@ body {
 }
 
 .logout-btn:hover {
-    background: #ff3333;
+    background: #fbbf24;
 }
 
 .message {
-    background: #cc0000;
+    background: #facc15;
     color: #000;
     padding: 12px 20px;
     border-radius: 8px;
@@ -70,17 +70,17 @@ body {
 }
 
 .create-film-card, .films-list-card {
-    background: #121212;
+    color: #fac415;
+    border-bottom: 2px solid #fac415;
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 4px 20px rgba(204, 0, 0, 0.1);
-    border: 1px solid #2a2a2a;
 }
 
 .create-film-card h2, .films-list-card h2 {
-    color: #cc0000;
+    color: #fa8f15;
     margin-bottom: 20px;
-    border-bottom: 2px solid #cc0000;
+    border-bottom: 2px solid #fa8f15;
     display: inline-block;
     padding-bottom: 5px;
 }
@@ -93,14 +93,14 @@ body {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
-    color: #ff6666;
+    color: #fbbf24;
 }
 
 .film-form input, .film-form textarea, .film-form select {
     width: 100%;
     padding: 10px 12px;
     background: #1e1e1e;
-    border: 1px solid #cc0000;
+    border: 1px solid #d87538;
     border-radius: 6px;
     color: #fff;
     font-size: 1rem;
@@ -115,7 +115,7 @@ body {
 .small-link {
     display: inline-block;
     margin-top: 8px;
-    color: #ff6666;
+    color: #ffb066;
     font-size: 0.85rem;
     text-decoration: none;
 }
@@ -125,7 +125,7 @@ body {
 }
 
 .btn-create {
-    background: #cc0000;
+    background: #d87538;
     color: #000;
     border: none;
     padding: 12px 20px;
@@ -139,7 +139,7 @@ body {
 }
 
 .btn-create:hover {
-    background: #ff3333;
+    background: #c74f2e;
 }
 
 .table-responsive {
@@ -160,7 +160,7 @@ body {
 
 .films-table th {
     background: #1f1f1f;
-    color: #cc0000;
+    color: #facc15;
     font-weight: 600;
 }
 
@@ -169,8 +169,8 @@ body {
 }
 
 .btn-delete {
-    background: #d9534f;
-    color: white;
+    background: #d87538;
+    color: black;
     border: none;
     padding: 6px 14px;
     border-radius: 4px;
@@ -180,11 +180,24 @@ body {
 }
 
 .btn-delete:hover {
-    background: #c9302c;
+    background: #c74f2e;
 }
 
 .delete-form {
     display: inline;
+}
+
+.btn-edit {
+    background: #facc15;
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 8px;
+}
+.btn-edit:hover {
+    background: #fbbf24;
 }
 
 @media (max-width: 900px) {

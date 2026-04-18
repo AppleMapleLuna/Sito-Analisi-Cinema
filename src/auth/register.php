@@ -16,19 +16,19 @@ if (empty($email) || empty($username) || empty($password)) {
 
 // Sicurezza password giusto in caso
 if (!preg_match($pattern, $password)) {
-    header("Location: ../../public/register.php?e=weak");
+    header("Location: /register.php?e=weak");
     exit;
 }
 
 // controlla se il formato è giusto
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    header("Location: ../../public/register.php?e=email");
+    header("Location: /register.php?e=email");
     exit;
 }
 
 // Controlla se l'username sia idonea.
 if (!preg_match('/^[A-Za-z0-9_]{3,20}$/', $username)) {
-    header("Location: ../../public/register.php?e=user");
+    header("Location: /register.php?e=user");
     exit;
 }
 
@@ -39,7 +39,7 @@ $check->execute();
 $check->store_result();
 
 if ($check->num_rows > 0) {
-    header("Location: ../../public/register.php?e=exists");
+    header("Location: /register.php?e=exists");
     exit;
 }
 
@@ -54,11 +54,11 @@ $stmt->bind_param("ssss", $email, $username, $hashed, $token);
 
 if ($stmt->execute()) {
     sendVerificationEmail($email, $token);
-    header("Location: ../../public/register.php?ok=1");
+    header("Location: /register.php?ok=1");
     exit;
 }
 
-header("Location: ../../public/register.php?e=1");
+header("Location: /register.php?e=1");
 
 $check->close();
 $stmt->close();
