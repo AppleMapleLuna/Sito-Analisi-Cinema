@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f172a;
+    color: #eaf7ff;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+.statistiche-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #1e293b;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.back-link {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #facc15;
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover { color: #ffd966; }
+.film-header {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+.film-poster {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #facc15;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.poster-placeholder {
+    width: 200px;
+    height: 300px;
+    background: #2d3748;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: #ccc;
+    font-style: italic;
+}
+.film-info { flex: 1; }
+.film-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #facc15;
+}
+.regista {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+.stats-overview {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    justify-content: center;
+}
+.stat-card {
+    background: #0f172a;
+    padding: 20px 40px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid #facc15;
+}
+.stat-label {
+    display: block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #facc15;
+}
+.chart-container {
+    background: #0f172a;
+    padding: 25px;
+    border-radius: 16px;
+    margin-top: 20px;
+}
+.chart-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #facc15;
+}
+#votiChart {
+    max-height: 300px;
+    width: 100% !important;
+}
+.no-reviews {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 40px;
+    background: #0f172a;
+    border-radius: 12px;
+    color: #aaa;
+}
+@media (max-width: 600px) {
+    .film-header { flex-direction: column; align-items: center; }
+    .film-info h1 { font-size: 2rem; }
+    .stats-overview { flex-direction: column; }
+}
