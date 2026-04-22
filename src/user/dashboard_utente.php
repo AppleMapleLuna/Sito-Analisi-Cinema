@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user'])) {
-    header("Location: /login.php");
+    header("Location: ../../public/login.php");
     exit;
 }
 ?>
@@ -69,13 +69,13 @@ if (!isset($_SESSION['user'])) {
   </div>
 
   <div class="nav-actions">
-    <a href="index.php" class="nav-link">
+    <a href="../../public/index.php" class="nav-link">
       <i class="fas fa-home"></i> Homepage
     </a>
-    <a href="profilo.php" class="nav-link">
+    <a href="../../public/profilo.php" class="nav-link">
       <i class="fas fa-user-circle"></i> Profilo
     </a>
-    <a href="logout.php" class="nav-link logout-link">
+    <a href="../../public/logout.php" class="nav-link logout-link">
       <i class="fas fa-sign-out-alt"></i> Logout
     </a>
   </div>

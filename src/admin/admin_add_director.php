@@ -1,10 +1,15 @@
 <?php
-require_once '../database/php.conndatabase.php';
+require_once __DIR__ . '/../database/php.conndatabase.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['admin'] !== 1) {
+if (
+    !isset($_SESSION['user']) ||
+    !isset($_SESSION['user']['ID_Utente']) ||
+    $_SESSION['user']['admin'] !== 1
+) {
     header('Location: ../../public/login.php');
     exit;
 }
+
 
 $message = '';
 $error = '';
@@ -21,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("INSERT INTO Registi (Nome, Cognome, Data_Nascita) VALUES (?, ?, ?)");
             $stmt->execute([$nome, $cognome, $data_nascita]);
             $_SESSION['message'] = 'Regista "' . htmlspecialchars($nome . ' ' . $cognome) . '" aggiunto con successo.';
-            header('Location: dashboard_admin.php');
+            header('Location: ../../public/dashboard.php');
             exit;
         } catch (PDOException $e) {
             $error = 'Errore durante l\'inserimento: ' . $e->getMessage();

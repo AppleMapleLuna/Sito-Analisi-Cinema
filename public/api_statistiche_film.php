@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require_once __DIR__ . '/../database/connessione_db.php';
+require_once __DIR__ . '/../src/database/connessione_db.php';
 
 $film_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 if ($film_id <= 0) {

@@ -10,18 +10,18 @@
         <div>
             <h3>Link</h3>
             <ul>
-                <li><a href="/dashboard.php">Home</a></li>
-                <li><a href="/ricerca_film.php">Film</a></li>
-                <li><a href="/recensioni.php">Recensioni</a></li>
+                <li><a href="dashboard.php">Home</a></li>
+                <li><a href="ricerca_film.php">Film</a></li>
+                <li><a href="recensioni.php">Recensioni</a></li>
             </ul>
         </div>
 
         <div>
             <h3>Account</h3>
             <ul>
-                <li><a href="/login.php">Login</a></li>
-                <li><a href="/register.php">Registrazione</a></li>
-                <li><a href="/profilo.php">Profilo</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="register.php">Registrazione</a></li>
+                <li><a href="profilo.php">Profilo</a></li>
             </ul>
         </div>
 

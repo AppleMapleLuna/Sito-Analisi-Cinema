@@ -112,7 +112,8 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
                             <?php endforeach; ?>
                         </select>
 
-                        <a href="/admin_add_director.php" class="small-link">+ Nuovo regista</a>
+                        <a href="admin_add_director.php" class="small-link">+ Nuovo regista</a>
+
                     </div>
 
                     <button type="submit" class="btn-create">Crea film</button>

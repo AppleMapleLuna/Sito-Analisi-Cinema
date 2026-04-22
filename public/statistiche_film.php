@@ -1,27 +1,43 @@
 <?php
-require_once __DIR__ . '/../src/database/connessione_db.php';
+require_once __DIR__ . '/../database/php.conndatabase.php';
+
 $id = $_GET['id'] ?? 0;
 if (!$id) die("ID film mancante");
 
-$film = $conn->query("SELECT f.Titolo, f.Anno, r.Nome, r.Cognome, 
-                      (SELECT URL FROM immagini WHERE ID_Film = f.ID_Film LIMIT 1) AS poster
-                      FROM film f
-                      LEFT JOIN registi r ON f.ID_Regista = r.ID_Regista
-                      WHERE f.ID_Film = $id")->fetch_assoc();
+// Usa prepared statement per sicurezza
+$stmt = $conn->prepare("
+    SELECT f.Titolo, f.Anno, r.Nome, r.Cognome, 
+           (SELECT URL FROM immagini WHERE ID_Film = f.ID_Film LIMIT 1) AS poster
+    FROM film f
+    LEFT JOIN registi r ON f.ID_Regista = r.ID_Regista
+    WHERE f.ID_Film = ?
+");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$film = $stmt->get_result()->fetch_assoc();
+
 if (!$film) die("Film non trovato");
 
-$stats = $conn->query("SELECT COUNT(*) AS num_recensioni, AVG(Voto) AS voto_medio FROM valutazioni WHERE ID_Film = $id")->fetch_assoc();
+$stmt2 = $conn->prepare("
+    SELECT COUNT(*) AS num_recensioni, AVG(Voto) AS voto_medio 
+    FROM valutazioni 
+    WHERE ID_Film = ?
+");
+$stmt2->bind_param("i", $id);
+$stmt2->execute();
+$stats = $stmt2->get_result()->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Statistiche: <?= htmlspecialchars($film['Titolo']) ?></title>
-    <link rel="stylesheet" href="../src/template/pagine/stile_statistiche_film.css">
+    <link rel="stylesheet" href="../src/template/pages/stile_statistiche_film.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
-    <?php include __DIR__ . '/../src/template/componenti/componente_header.php'; ?>
+    <?php include __DIR__ . '/../src/template/componenti/navbar.php'; ?>
+    
     <div class="statistiche-container">
         <a href="scheda_film.php?id=<?= $id ?>" class="back-link">← Torna alla scheda film</a>
 
@@ -57,7 +73,8 @@ $stats = $conn->query("SELECT COUNT(*) AS num_recensioni, AVG(Voto) AS voto_medi
             <p class="no-reviews">Ancora nessuna recensione per questo film.</p>
         <?php endif; ?>
     </div>
-    <?php include __DIR__ . '/../src/template/componenti/componente_footer.php'; ?>
+    
+    <?php include __DIR__ . '/../src/template/componenti/footer.php'; ?>
     <script src="../src/scripts/script_statistiche_film.js"></script>
 </body>
 </html>
