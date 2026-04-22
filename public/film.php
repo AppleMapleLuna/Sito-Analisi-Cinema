@@ -19,9 +19,10 @@ $rating = FilmRepository::getRating($id);
 <meta charset="UTF-8">
 <title><?= htmlspecialchars($film['Titolo']) ?></title>
 <link rel="stylesheet" href="assets/css/film_dettagli.css">
+<link rel="stylesheet" href="assets/components/navbar_style.css">
 </head>
 <body>
-
+<?php include __DIR__ . '/assets/components/navbar.php'; ?>
 <div class="film-container">
 
     <div class="poster">
@@ -44,6 +45,31 @@ $rating = FilmRepository::getRating($id);
                 <li><?= $a['Nome'] . " " . $a['Cognome'] ?></li>
             <?php endforeach; ?>
         </ul>
+
+        <?php if (isset($_SESSION['user'])): ?>
+            <div class="review-form">
+                <h3>Scrivi una recensione</h3>
+
+                <form action="../src/auth/salva_recensione.php" method="POST">
+                    <input type="hidden" name="film_id" value="<?= $id ?>">
+
+                    <label for="testo">La tua recensione</label>
+                    <textarea name="testo" id="testo" rows="4" required></textarea>
+
+                    <label for="voto">Voto (1–10)</label>
+                    <select name="voto" id="voto" required>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor; ?>
+                    </select>
+
+                    <button type="submit">Invia recensione</button>
+                </form>
+            </div>
+        <?php else: ?>
+            <p><a href="login.php" class="login-link">Accedi</a> per scrivere una recensione.</p>
+        <?php endif; ?>
+
 
         <h2>Recensioni</h2>
         <?php foreach ($reviews as $r): ?>

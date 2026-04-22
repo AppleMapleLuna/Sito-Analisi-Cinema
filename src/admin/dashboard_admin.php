@@ -45,10 +45,6 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Gestione film</title>
-
-    <!-- Percorsi corretti -->
-    <link rel="stylesheet" href="../template/pages/admin_style.css">
-    <script src="../scripts/admin_script.js" defer></script>
 </head>
 <body>
 

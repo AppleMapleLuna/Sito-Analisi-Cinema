@@ -41,10 +41,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ricerca film</title>
-    <link rel="stylesheet" href="../src/template/pages/film_ricerca_style.css">
+    <link rel="stylesheet" href="assets/css/film_ricerca_style.css">
 </head>
 <body>
-    <?php include __DIR__ . '/../src/template/components/navbar.php'; ?>
+    <?php include __DIR__ . '/assets/components/navbar.php'; ?>
+
     <h1>Ricerca film</h1>
 
     <form class="film-filters" method="GET">
@@ -70,7 +71,7 @@
 
     <div class="film-list">
         <?php foreach ($films as $film): ?>
-            <?php include '../src/template/components/film-card.php'; ?>
+            <?php include __DIR__ . '/assets/components/film-card.php'; ?>
         <?php endforeach; ?>
     </div>
             
@@ -86,7 +87,7 @@
         </div>
     </div>
     
-    <script src="../src/scripts/film_popup.js"></script>
+    <script src="assets/scripts/film_popup.js"></script>
 
 </body>
 </html>

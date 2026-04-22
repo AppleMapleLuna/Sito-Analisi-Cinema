@@ -1,3 +1,10 @@
+<?php
+require_once __DIR__ . '/../src/database/php.conndatabase.php';
+require_once __DIR__ . '/../src/auth/film_repository.php';
+
+FilmRepository::init($conn);
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -9,7 +16,7 @@
 <title>Analisi Cinema</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../src/template/pages/homepagestyle.css">
+<link rel="stylesheet" href="assets/css/homepagestyle.css">
 </head>
 
 
@@ -39,112 +46,103 @@ Scopri nuovi film, leggi recensioni degli utenti e trova cosa guardare al cinema
 
 <!-- FILM POPOLARI -->
 
+<?php
+$popular = $conn->query("
+    SELECT f.ID_film, f.Titolo, 
+           COALESCE(i.URL, 'https://via.placeholder.com/300x450') AS Immagine,
+           COALESCE(AVG(v.Voto), 0) AS media_voto
+    FROM film f
+    LEFT JOIN immagini i ON f.ID_film = i.ID_Film
+    LEFT JOIN valutazioni v ON f.ID_film = v.ID_Film
+    GROUP BY f.ID_film
+    ORDER BY media_voto DESC
+    LIMIT 4
+")->fetch_all(MYSQLI_ASSOC);
+?>
+
 <section>
+    <h2 class="title">🔥 Film Popolari</h2>
 
-<h2 class="title">🔥 Film Popolari</h2>
-
-<div class="movies">
-
-<div class="movie">
-<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
-<div class="movie-info">
-<h3>Interstellar</h3>
-<p>⭐ 9.0</p>
-</div>
-</div>
-
-<div class="movie">
-<img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
-<div class="movie-info">
-<h3>The Dark Knight</h3>
-<p>⭐ 9.1</p>
-</div>
-</div>
-
-<div class="movie">
-<img src="https://image.tmdb.org/t/p/w500/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg">
-<div class="movie-info">
-<h3>Avengers</h3>
-<p>⭐ 8.5</p>
-</div>
-</div>
-
-<div class="movie">
-<img src="https://image.tmdb.org/t/p/w500/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg">
-<div class="movie-info">
-<h3>Guardians of the Galaxy</h3>
-<p>⭐ 8.4</p>
-</div>
-</div>
-
-</div>
-
+    <div class="movies">
+        <?php foreach ($popular as $film): ?>
+            <div class="movie" onclick="location.href='film.php?id=<?= $film['ID_film'] ?>'">
+                <img src="<?= htmlspecialchars($film['Immagine']) ?>" alt="<?= htmlspecialchars($film['Titolo']) ?>">
+                <div class="movie-info">
+                    <h3><?= htmlspecialchars($film['Titolo']) ?></h3>
+                    <p>⭐ <?= round($film['media_voto'], 1) ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </section>
+
 
 
 <!-- RECENSIONI -->
+<?php
+$reviews = $conn->query("
+    SELECT r.Testo, r.Data,
+           f.Titolo,
+           COALESCE(v.Voto, 'N/A') AS Voto
+    FROM recensioni r
+    JOIN film f ON r.ID_Film = f.ID_film
+    LEFT JOIN valutazioni v ON r.ID_Film = v.ID_Film AND r.ID_Utente = v.ID_Utente
+    ORDER BY r.Data DESC
+    LIMIT 3
+")->fetch_all(MYSQLI_ASSOC);
+?>
 
 <section>
+    <h2 class="title">📝 Ultime Recensioni</h2>
 
-<h2 class="title">📝 Ultime Recensioni</h2>
-
-<div class="reviews">
-
-<div class="review">
-<h4>Interstellar</h4>
-<p>
-Un capolavoro di fantascienza con una trama emozionante e una colonna sonora incredibile.
-</p>
-<p>⭐ 9/10</p>
-</div>
-
-<div class="review">
-<h4>The Dark Knight</h4>
-<p>
-Il miglior film su Batman mai realizzato.
-</p>
-<p>⭐ 9.5/10</p>
-</div>
-
-<div class="review">
-<h4>Avengers</h4>
-<p>
-Azione spettacolare e grande cast.
-</p>
-<p>⭐ 8/10</p>
-</div>
-
-</div>
-
+    <div class="reviews">
+        <?php if (!empty($reviews)): ?>
+            <?php foreach ($reviews as $r): ?>
+                <div class="review">
+                    <h4><?= htmlspecialchars($r['Titolo']) ?></h4>
+                    <p><?= htmlspecialchars($r['Testo']) ?></p>
+                    <p>⭐ <?= $r['Voto'] ?>/10</p>
+                    <small><?= $r['Data'] ?></small>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Nessuna recensione disponibile.</p>
+        <?php endif; ?>
+    </div>
 </section>
+
+
 
 
 <!-- STATISTICHE -->
 
+<?php
+$totFilm = $conn->query("SELECT COUNT(*) FROM film")->fetch_row()[0];
+$totRec = $conn->query("SELECT COUNT(*) FROM recensioni")->fetch_row()[0];
+$totUsers = $conn->query("SELECT COUNT(*) FROM utenti")->fetch_row()[0];
+?>
+
 <section>
+    <h2 class="title">📊 Statistiche del sito</h2>
 
-<h2 class="title">📊 Statistiche del sito</h2>
+    <div class="stats">
+        <div class="stat">
+            <h2><?= $totFilm ?></h2>
+            <p>Film</p>
+        </div>
 
-<div class="stats">
+        <div class="stat">
+            <h2><?= $totRec ?></h2>
+            <p>Recensioni</p>
+        </div>
 
-<div class="stat">
-<h2>1200+</h2>
-<p>Film</p>
-</div>
-
-<div class="stat">
-<h2>3500+</h2>
-<p>Recensioni</p>
-</div>
-
-<div class="stat">
-<h2>2000+</h2>
-<p>Utenti</p>
-</div>
-
-</div>
-
+        <div class="stat">
+            <h2><?= $totUsers ?></h2>
+            <p>Utenti</p>
+        </div>
+    </div>
 </section>
+
 
 <?php include __DIR__ . '/assets/components/componente_footer.php'; ?>
 

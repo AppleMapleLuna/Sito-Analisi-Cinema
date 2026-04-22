@@ -1,123 +1,124 @@
 /* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Poppins, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins, sans-serif;
 }
 
-/* BACKGROUND */
-body {
-    background: #0f172a;
-    color: white;
-    padding: 40px 20px;
+body{
+    background:#0f172a;
+    color:white;
+    padding:40px;
 }
 
-/* FORM CONTAINER */
-.form-container {
-    max-width: 600px;
-    margin: 0 auto 50px;
-    background: #1e293b;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(250, 204, 21, 0.15);
-    border: 1px solid rgba(250, 204, 21, 0.2);
+/* TITOLO */
+.title{
+    font-size:40px;
+    text-align:center;
+    margin-bottom:40px;
+    color:#facc15;
+    text-shadow:0 0 10px rgba(250,204,21,0.4);
 }
 
-.form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #facc15;
+/* FORM SCRITTURA */
+.form-container{
+    max-width:600px;
+    margin:0 auto 50px auto;
+    background:#1e293b;
+    padding:30px;
+    border-radius:14px;
+    box-shadow:0 0 25px rgba(0,0,0,0.4);
 }
 
-/* INPUTS */
-.form-container input,
-.form-container textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    background: #0f172a;
-    border: 1px solid #334155;
-    border-radius: 8px;
-    color: white;
-    transition: 0.2s;
+.form-container h2{
+    color:#facc15;
+    margin-bottom:20px;
+    text-align:center;
 }
 
-.form-container input:focus,
-.form-container textarea:focus {
-    border-color: #facc15;
-    box-shadow: 0 0 8px rgba(250, 204, 21, 0.4);
-    outline: none;
+.form-container select,
+.form-container textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    border:none;
+    border-radius:8px;
+    background:#0f172a;
+    color:white;
 }
 
-/* STARS */
-.stars {
-    text-align: center;
-    margin-bottom: 15px;
+.form-container button{
+    width:100%;
+    padding:12px;
+    background:#facc15;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    color:#020617;
+    transition:0.3s;
 }
 
-.stars span {
-    font-size: 30px;
-    cursor: pointer;
-    color: #475569;
-    transition: 0.2s;
+.form-container button:hover{
+    background:#ffe066;
 }
 
-.stars span.active {
-    color: #facc15;
-    transform: scale(1.2);
+/* LISTA RECENSIONI */
+.rec-list{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
 }
 
-/* SUBMIT BUTTON */
-.form-container button {
-    width: 100%;
-    padding: 12px;
-    background: #facc15;
-    color: #0f172a;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
+.rec-card{
+    background:#1e293b;
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+    border-left:5px solid #facc15;
+    transition:0.3s;
 }
 
-.form-container button:hover {
-    background: #fbbf24;
+.rec-card:hover{
+    transform:translateX(5px);
+    box-shadow:0 0 25px #facc15;
 }
 
-/* REVIEW CARD */
-.rec-card {
-    max-width: 600px;
-    margin: 20px auto;
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid rgba(250, 204, 21, 0.2);
-    box-shadow: 0 0 15px rgba(250, 204, 21, 0.1);
+.rec-card h3{
+    color:#facc15;
+    margin-bottom:10px;
 }
 
-.rec-card h3 {
-    color: #facc15;
-    margin-bottom: 10px;
+.author{
+    opacity:0.7;
+    margin-bottom:10px;
 }
 
-.rec-card p {
-    margin-bottom: 15px;
-    opacity: 0.9;
+.delete-btn{
+    margin-top:15px;
+    padding:8px 12px;
+    background:#ff4d4d;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+    transition:0.3s;
 }
 
-/* DELETE BUTTON */
-.delete-btn {
-    background: #dc2626;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
+.delete-btn:hover{
+    background:#ff1a1a;
 }
 
-.delete-btn:hover {
-    background: #b91c1c;
+/* LOGIN WARNING */
+.login-warning{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.login-warning a{
+    color:#facc15;
+    text-decoration:none;
 }
