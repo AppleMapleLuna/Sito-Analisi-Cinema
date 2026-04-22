@@ -114,4 +114,42 @@ class FilmRepository {
         return $stmt->get_result()->fetch_assoc();
     }
 
+    public static function getActors($filmId) {
+        $sql = "
+            SELECT a.Nome, a.Cognome
+            FROM film_attori fa
+            JOIN attori a ON fa.ID_Attore = a.ID_Attore
+            WHERE fa.ID_Film = ?
+        ";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->bind_param("i", $filmId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public static function getReviews($filmId) {
+        $sql = "
+            SELECT r.Testo, r.Data, u.Username
+            FROM recensioni r
+            JOIN utenti u ON r.ID_Utente = u.ID_Utente
+            WHERE r.ID_Film = ?
+        ";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->bind_param("i", $filmId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public static function getRating($filmId) {
+        $sql = "
+            SELECT AVG(Voto) AS Media
+            FROM valutazioni
+            WHERE ID_Film = ?
+        ";
+        $stmt = self::$conn->prepare($sql);
+        $stmt->bind_param("i", $filmId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()['Media'] ?? null;
+    }
+
 }
