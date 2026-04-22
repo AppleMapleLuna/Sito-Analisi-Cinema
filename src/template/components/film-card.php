@@ -1,10 +1,4 @@
-<div class="film-card"
-    data-title="<?= htmlspecialchars($film['Titolo']) ?>"
-    data-desc="<?= htmlspecialchars($film['Trama']) ?>"
-    data-year="<?= htmlspecialchars($film['Anno']) ?>"
-    data-genre="<?= htmlspecialchars($film['Nome_Genere'] ?? '') ?>"
-    data-img="<?= htmlspecialchars($film['poster'] ?? '') ?>"
->
+<a href="/pages/film.php?id=<?= $film['ID_Film'] ?>" class="film-card">
     <?php if (!empty($film['poster'])): ?>
         <img src="<?= htmlspecialchars($film['poster']) ?>" alt="<?= htmlspecialchars($film['Titolo']) ?>">
     <?php else: ?>
@@ -12,4 +6,4 @@
     <?php endif; ?>
 
     <h3><?= htmlspecialchars($film['Titolo']) ?></h3>
-</div>
+</a>

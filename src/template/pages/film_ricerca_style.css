@@ -12,6 +12,10 @@ body{
 h1{
     color: white;
 }
+a{
+    color:white;
+    font-style: normal;
+}
 
 /* NAVBAR */
 
