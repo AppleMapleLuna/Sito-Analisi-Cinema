@@ -5,7 +5,7 @@ $film = FilmRepository::getFilmById($_GET['id']);
 
 <h2>Modifica Film</h2>
 
-<form action="/dashboard.php?page=film_save" method="POST">
+<form action="/dashboard_admin.php?page=film_save" method="POST">
     <input type="hidden" name="id" value="<?= $film['ID_Film'] ?>">
 
     <label>Titolo</label><br>

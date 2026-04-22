@@ -12,7 +12,7 @@ if (
     !isset($_SESSION['user']['ID_Utente']) ||
     $_SESSION['user']['admin'] !== 1
 ) {
-    header('Location: /login.php');
+    header('Location: ../../public/login.php');
     exit;
 }
 
@@ -47,8 +47,8 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
     <title>Admin - Gestione film</title>
 
     <!-- Percorsi corretti -->
-    <link rel="stylesheet" href="/src/template/pages/admin_style.css">
-    <script src="/src/scripts/admin_script.js" defer></script>
+    <link rel="stylesheet" href="../template/pages/admin_style.css">
+    <script src="../scripts/admin_script.js" defer></script>
 </head>
 <body>
 
@@ -59,7 +59,7 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
             <h1>Area Amministratore</h1>
             <div class="user-info">
                 <span>Ciao, <?= htmlspecialchars($_SESSION['user']['Username']) ?></span>
-                <a href="/logout.php" class="logout-btn">Logout</a>
+                <a href="../../public/logout.php" class="logout-btn">Logout</a>
             </div>
         </header>
 
@@ -74,7 +74,7 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
             <section class="create-film-card">
                 <h2>Crea Nuovo film</h2>
 
-                <form action="/src/admin/film_create.php" method="POST" class="film-form">
+                <form action="film_create.php" method="POST" class="film-form">
 
                     <div class="form-group">
                         <label for="titolo">Titolo</label>
@@ -112,7 +112,7 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
                             <?php endforeach; ?>
                         </select>
 
-                        <a href="/src/admin/admin_add_director.php" class="small-link">+ Nuovo regista</a>
+                        <a href="/admin_add_director.php" class="small-link">+ Nuovo regista</a>
                     </div>
 
                     <button type="submit" class="btn-create">Crea film</button>
@@ -147,14 +147,14 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
                                         <td><?= htmlspecialchars($film['Nome'] . ' ' . $film['Cognome']) ?></td>
 
                                         <td>
-                                            <form action="/src/admin/film_delete.php" method="POST" class="delete-form">
+                                            <form action="film_delete.php" method="POST" class="delete-form">
                                                 <input type="hidden" name="film_id" value="<?= $film['ID_film'] ?>">
                                                 <button type="submit" class="btn-delete">Elimina</button>
                                             </form>
                                         </td>
 
                                         <td>
-                                            <a href="/src/admin/film_edit.php?id=<?= $film['ID_film'] ?>" class="btn-edit">Modifica</a>
+                                            <a href="film_edit.php?id=<?= $film['ID_film'] ?>" class="btn-edit">Modifica</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

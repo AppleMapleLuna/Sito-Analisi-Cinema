@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="../src/template/pages/film_ricerca_style.css">
 </head>
 <body>
-
+    <?php include __DIR__ . '../src/template/components/navbar.php'; ?>
     <h1>Ricerca film</h1>
 
     <form class="film-filters" method="GET">

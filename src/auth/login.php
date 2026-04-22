@@ -19,7 +19,7 @@ $result = $stmt->get_result();
 if ($row = $result->fetch_assoc()) {
 
     if ($row['Verificato'] == 0) {
-        header('Location: /login.php?e=2'); // email non verificata
+        header('Location: ../../public/login.php?e=2'); // email non verificata
         exit;
     }
 

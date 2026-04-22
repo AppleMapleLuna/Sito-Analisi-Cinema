@@ -17,4 +17,4 @@ if(!isset($users[$email]) || !password_verify($pass,$users[$email]['hash'])){
 }
 
 $_SESSION['user']=$users[$email];
-header("Location: dashboard.php");
+header("Location: ../../public/dashboard.php");

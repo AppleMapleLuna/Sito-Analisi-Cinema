@@ -7,21 +7,19 @@ if (!$token) {
     die("Token mancante.");
 }
 
-$sql = "UPDATE utenti SET Verificato = 1 WHERE TokenVerifica = ?";
+// Un solo UPDATE: verifica e invalida il token
+$sql = "UPDATE utenti 
+        SET Verificato = 1, TokenVerifica = NULL 
+        WHERE TokenVerifica = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $token);
 $stmt->execute();
 
 if ($stmt->affected_rows > 0) {
-    echo "Email verificata! Ora puoi effettuare il login.";
+    // Token valido → utente verificato
+    header("Location: login.php?verified=1");
+    exit;
 } else {
-    echo "Token non valido.";
+    // Token non trovato → link vecchio / sbagliato
+    echo "Token non valido o già usato.";
 }
-
-$sql = "UPDATE utenti SET Verificato = 1, TokenVerifica = NULL WHERE TokenVerifica = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $token);
-$stmt->execute();
-
-header("Location: login.php?verified=1");
-exit;

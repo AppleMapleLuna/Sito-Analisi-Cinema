@@ -11,10 +11,10 @@ if (!isset($_SESSION['ID_Utente'])) {
     <meta charset="UTF-8">
     <title>Il mio profilo</title>
     <link rel="stylesheet" href="../src/template/style_gestione_profilo.css">
-    <link rel="stylesheet" href="/src/template/components/navbar_style.css">
+    <link rel="stylesheet" href="../src/template/components/navbar_style.css">
 </head>
 <body>
-    <?php include __DIR__ . '/src/template/components/navbar.php'; ?>
+    <?php include __DIR__ . '../src/template/components/navbar.php'; ?>
     <div class="container">
         <div class="profile-card">
             <h1>Il mio profilo</h1>

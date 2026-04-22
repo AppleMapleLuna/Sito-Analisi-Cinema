@@ -7,5 +7,5 @@ if (!empty($_POST['id'])) {
     FilmRepository::createFilm($_POST);
 }
 
-header("Location: /dashboard.php?page=film");
+header("Location: /dashboard_admin.php?page=film");
 exit;

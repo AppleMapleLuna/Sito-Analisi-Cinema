@@ -29,5 +29,5 @@ if (!empty($img_url)) {
 }
 
 $_SESSION['message'] = "Film aggiornato!";
-header("Location: /dashboard.php");
+header("Location: /dashboard_admin.php");
 exit;

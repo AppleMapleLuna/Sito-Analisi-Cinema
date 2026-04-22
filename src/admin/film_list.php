@@ -21,8 +21,8 @@
             <td><?= htmlspecialchars($film['Titolo']) ?></td>
             <td><?= $film['Anno'] ?></td>
             <td>
-                <a href="/dashboard.php?page=film_edit&id=<?= $film['ID_Film'] ?>">Modifica</a> |
-                <a href="/dashboard.php?page=film_delete&id=<?= $film['ID_Film'] ?>"
+                <a href="/dashboard_admin.php?page=film_edit&id=<?= $film['ID_Film'] ?>">Modifica</a> |
+                <a href="/dashboard_admin.php?page=film_delete&id=<?= $film['ID_Film'] ?>"
                    onclick="return confirm('Sei sicuro di voler eliminare questo film?')">
                    Elimina
                 </a>

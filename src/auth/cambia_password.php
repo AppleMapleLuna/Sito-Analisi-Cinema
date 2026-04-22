@@ -37,6 +37,6 @@ if (!isset($_SESSION['ID_Utente'])) {
             <div id="message" class="message"></div>
         </div>
     </div>
-    <script src="cambia_password.js"></script>
+    <script src="../scripts/cambia_password.js"></script>
 </body>
 </html>
