@@ -68,7 +68,7 @@ if (!isset($_SESSION['ID_Utente'])) {
             <div id="message" class="message"></div>
         </div>
     </div>
-    <?php include __DIR__ . '/../src/template/components/componente_footer.php'; ?>
+    <?php include __DIR__ . '/assetscomponents/componente_footer.php'; ?>
     <script src="../src/scripts/script_profilo.js"></script>
 </body>
 </html>

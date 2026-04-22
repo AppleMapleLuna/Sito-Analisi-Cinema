@@ -18,7 +18,7 @@ $rating = FilmRepository::getRating($id);
 <head>
 <meta charset="UTF-8">
 <title><?= htmlspecialchars($film['Titolo']) ?></title>
-<link rel="stylesheet" href="../src/template/pages/film_dettagli.css">
+<link rel="stylesheet" href="assets/css/film_dettagli.css">
 </head>
 <body>
 

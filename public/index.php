@@ -146,7 +146,7 @@ Azione spettacolare e grande cast.
 
 </section>
 
-<?php include __DIR__ . '/../src/template/components/componente_footer.php'; ?>
+<?php include __DIR__ . '/components/componente_footer.php'; ?>
 
 <script>
 

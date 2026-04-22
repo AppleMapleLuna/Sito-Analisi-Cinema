@@ -12,7 +12,7 @@ $error = $_GET['e'] ?? '';
     <meta charset="utf-8">
     <title>Neon Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../src/template/pages/style_login.css">
+    <link rel="stylesheet" href="assets/css/style_login.css">
   </head>
   <body>
     <?php if (isset($_GET['verified'])): ?>
