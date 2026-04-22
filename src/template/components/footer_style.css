@@ -1,0 +1,46 @@
+/*
+<?php include __DIR__ . 'src/template/components/componente_footer.php'; ?>
+<link rel="stylesheet" href="/src/template/components/footer_style.css">
+*/
+
+.footer {
+    background: #020617;
+    padding: 60px;
+    margin-top: 80px;
+    color: white;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer h3 {
+    color: #facc15;
+    margin-bottom: 10px;
+}
+
+.footer ul {
+    list-style: none;
+}
+
+.footer li {
+    margin-bottom: 10px;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.footer a:hover {
+    opacity: 1;
+}
+
+.copy {
+    text-align: center;
+    margin-top: 40px;
+    opacity: 0.6;
+}

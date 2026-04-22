@@ -1,0 +1,50 @@
+/*
+<?php include __DIR__ . '/src/template/components/navbar.php'; ?>
+<link rel="stylesheet" href="/src/template/components/navbar_style.css">
+*/
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    background: #020617;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 600;
+    color: #facc15;
+}
+
+.logo a {
+    color: #facc15;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #facc15;
+}
+
+.search {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
