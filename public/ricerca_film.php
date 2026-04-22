@@ -68,12 +68,25 @@
         <button type="submit">Filtra</button>
     </form>
 
-
     <div class="film-list">
         <?php foreach ($films as $film): ?>
             <?php include '../src/template/components/film-card.php'; ?>
         <?php endforeach; ?>
     </div>
+            
+
+    <div class="modal" id="filmModal">
+       <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImg">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+            <p><strong>Anno:</strong> <span id="modalYear"></span></p>
+            <p><strong>Genere:</strong> <span id="modalGenre"></span></p>
+        </div>
+    </div>
+    
+    <script src="../src/scripts/film_popup.js"></script>
 
 </body>
 </html>

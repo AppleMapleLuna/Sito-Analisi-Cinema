@@ -86,4 +86,32 @@ class FilmRepository {
 
         return $stmt->execute();
     }
+
+    // ottiene TUTTI i dati dei film
+    public static function getFilmFull($id) {
+        $sql = "
+            SELECT 
+                f.ID_Film,
+                f.Titolo,
+                f.Anno,
+                f.Durata,
+                f.Trama,
+                r.Nome AS RegistaNome,
+                r.Cognome AS RegistaCognome,
+                i.URL AS Immagine,
+                g.Nome_Genere
+            FROM film f
+            LEFT JOIN registi r ON f.ID_Regista = r.ID_Regista
+            LEFT JOIN immagini i ON f.ID_Film = i.ID_Film
+            LEFT JOIN film_generi fg ON f.ID_Film = fg.ID_Film
+            LEFT JOIN generi g ON fg.ID_Genere = g.ID_Genere
+            WHERE f.ID_Film = ?
+        ";
+
+        $stmt = self::$conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
 }
