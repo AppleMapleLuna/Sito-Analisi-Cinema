@@ -1,24 +1,47 @@
 <?php
-require_once __DIR__ . '/../../src/auth/film_repository.php';
-$film = FilmRepository::getFilmById($_GET['id']);
+session_start();
+
+if (!isset($_SESSION['user']) || $_SESSION['user']['admin'] !== 1) {
+    header("Location: ../../public/login.php");
+    exit;
+}
+
+require_once __DIR__ . '/../auth/film_repository.php';
+
+$id = $_GET['id'] ?? 0;
+$film = FilmRepository::getFilmById($id);
+
+if (!$film) {
+    echo "<p>Film non trovato.</p>";
+    exit;
+}
 ?>
 
 <h2>Modifica Film</h2>
 
-<form action="/dashboard_admin.php?page=film_save" method="POST">
-    <input type="hidden" name="id" value="<?= $film['ID_Film'] ?>">
+<form action="film_update.php" method="POST" class="film-form">
 
-    <label>Titolo</label><br>
-    <input type="text" name="titolo" value="<?= htmlspecialchars($film['Titolo']) ?>"><br><br>
+    <input type="hidden" name="id" value="<?= $film['ID_film'] ?>">
 
-    <label>Anno</label><br>
-    <input type="number" name="anno" value="<?= $film['Anno'] ?>"><br><br>
+    <div class="form-group">
+        <label>Titolo</label>
+        <input type="text" name="titolo" value="<?= htmlspecialchars($film['Titolo']) ?>" required>
+    </div>
 
-    <label>Durata</label><br>
-    <input type="time" name="durata" value="<?= $film['Durata'] ?>"><br><br>
+    <div class="form-group">
+        <label>Anno</label>
+        <input type="number" name="anno" value="<?= $film['Anno'] ?>" required>
+    </div>
 
-    <label>Trama</label><br>
-    <textarea name="trama"><?= htmlspecialchars($film['Trama']) ?></textarea><br><br>
+    <div class="form-group">
+        <label>Durata (minuti)</label>
+        <input type="number" name="durata" value="<?= $film['Durata'] ?>">
+    </div>
 
-    <button type="submit">Salva le Modifiche</button>
+    <div class="form-group">
+        <label>Trama</label>
+        <textarea name="trama"><?= htmlspecialchars($film['Trama']) ?></textarea>
+    </div>
+
+    <button type="submit" class="btn-create">Salva modifiche</button>
 </form>

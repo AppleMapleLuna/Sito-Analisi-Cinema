@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Nuovo Regista</title>
-    <link rel="stylesheet" href="../../public/assets/css/admin_style.css">
+    <link rel="stylesheet" href="../template/admin_style.css">
+
 </head>
 <body>
 
