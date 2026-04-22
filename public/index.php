@@ -16,7 +16,7 @@
 <body>
 
 <!-- NAVBAR -->
-<?php include __DIR__ . '../src/template/components/navbar.php'; ?>
+<?php include __DIR__ . '/../src/template/components/navbar.php'; ?>
 
 <!-- HERO -->
 
