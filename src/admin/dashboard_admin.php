@@ -32,7 +32,7 @@ $result = $conn->query("
 $films = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
 // Query registi
-$result2 = $conn->query("SELECT ID_regista, Nome, Cognome FROM registi ORDER BY Cognome");
+$result2 = $conn->query("SELECT ID_Regista, Nome, Cognome FROM registi ORDER BY Cognome");
 $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
 ?>
 
@@ -90,7 +90,7 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
                     <select id="regista" name="regista_id" required>
                         <option value="">Seleziona regista</option>
                         <?php foreach ($directors as $dir): ?>
-                            <option value="<?= $dir['ID_regista'] ?>">
+                            <option value="<?= $dir['ID_Regista'] ?>">
                                 <?= htmlspecialchars($dir['Nome'] . ' ' . $dir['Cognome']) ?>
                             </option>
                         <?php endforeach; ?>

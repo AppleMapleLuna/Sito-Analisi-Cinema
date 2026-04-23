@@ -27,9 +27,16 @@ class FilmRepository {
     // READ: singolo film
     public static function getFilmById($id) {
         $stmt = self::$conn->prepare("
-            SELECT f.ID_Film, f.Titolo, f.Anno, f.Durata, f.Trama,
-                   r.Nome AS RegistaNome, r.Cognome AS RegistaCognome,
-                   i.URL AS poster
+            SELECT 
+                f.ID_Film,
+                f.Titolo,
+                f.Anno,
+                f.Durata,
+                f.Trama,
+                f.ID_Regista,
+                r.Nome AS RegistaNome,
+                r.Cognome AS RegistaCognome,
+                i.URL AS poster
             FROM film f
             LEFT JOIN registi r ON f.ID_Regista = r.ID_Regista
             LEFT JOIN immagini i ON f.ID_Film = i.ID_Film
@@ -37,9 +44,10 @@ class FilmRepository {
         ");
         $stmt->bind_param("i", $id);
         $stmt->execute();
-
         return $stmt->get_result()->fetch_assoc();
     }
+
+
 
     // CREATE
     public static function createFilm($data) {
