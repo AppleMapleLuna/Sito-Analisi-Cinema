@@ -11,10 +11,6 @@ require_once __DIR__ . '/../auth/film_repository.php';
 
 // Inizializza la connessione nel repository
 FilmRepository::init($conn);
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
-exit;
 
 
 // Dati POST

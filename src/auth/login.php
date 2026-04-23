@@ -32,7 +32,8 @@ if ($row = $result->fetch_assoc()) {
         ];
 
 
-        header('Location: /dashboard.php');
+        header('Location: ../../public/dashboard.php');
+
         exit;
     }
 }
