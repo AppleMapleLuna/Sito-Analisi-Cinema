@@ -6,7 +6,7 @@ $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
 if (empty($email) || empty($password)) {
-    header('Location: /login.php?e=1');
+    header('Location: ../../public/login.php?e=1');
     exit;
 }
 
@@ -38,5 +38,5 @@ if ($row = $result->fetch_assoc()) {
     }
 }
 
-header('Location: /login.php?e=1');
+header('Location: ../../public/login.php?e=1');
 exit;

@@ -43,7 +43,7 @@ $directors = $result2 ? $result2->fetch_all(MYSQLI_ASSOC) : [];
         <h1>Area Amministratore</h1>
         <div class="user-info">
             <span>Ciao, <?= htmlspecialchars($_SESSION['user']['Username']) ?></span>
-            <a href="../../public/logout.php" class="logout-btn">Logout</a>
+            <a href="/Sito-Analisi-Cinema/public/logout.php" class="logout-btn">Logout</a>
         </div>
     </header>
 
