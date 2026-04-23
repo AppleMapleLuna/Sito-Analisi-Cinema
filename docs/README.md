@@ -11,7 +11,7 @@ https://docs.google.com/spreadsheets/d/1liWOzf8OB1L3UOAxZf2r_SUWakZTRsiR7phnaKxf
 
 ## Come si avvia il codice?
 1. Installare XAMPP e mettere i file che ci sono su github dentro ```C:\xampp\htdocs```
-2. Nella cartella che si trova a ```Sito-Analisi-Cinema/src/database``` aggiungere un file env con le credenziali del database
+2. Nella cartella che si trova a ```Sito-Analisi-Cinema/src/database``` aggiungere un file ```.env``` con le credenziali del database
 3. Attivare Apache su XAMPP
 4. Sul browser scrivere come URL ```localhost/Sito-Analisi-Cinema/```
 
